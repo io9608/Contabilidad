@@ -71,6 +71,16 @@ def get_connection():
                 """
             cursor.execute(sql_prod_final)
 
+            # Ensure precio_venta column exists (migration-safe)
+            try:
+                cursor.execute("SHOW COLUMNS FROM productos_finales LIKE 'precio_venta'")
+                col = cursor.fetchone()
+                if not col:
+                    cursor.execute("ALTER TABLE productos_finales ADD COLUMN precio_venta DECIMAL(10,2) NULL DEFAULT NULL")
+                    logger.info("Columna 'precio_venta' agregada a 'productos_finales'")
+            except Exception as e:
+                logger.warning(f"No se pudo verificar/agregar columna 'precio_venta' en 'productos_finales': {e}")
+
             sql_clientes = """
                 CREATE TABLE IF NOT EXISTS clientes(
                     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -78,6 +88,19 @@ def get_connection():
                 )
                 """
             cursor.execute(sql_clientes)
+
+            # Ensure 'active' column exists in clientes (migration-safe)
+            try:
+                cursor.execute("SHOW COLUMNS FROM clientes LIKE 'active'")
+                col = cursor.fetchone()
+                if not col:
+                    # MariaDB/MySQL: add column if missing
+                    cursor.execute("ALTER TABLE clientes ADD COLUMN active TINYINT(1) NOT NULL DEFAULT 1")
+                    logger.info("Columna 'active' agregada a 'clientes'")
+            except Exception as e:
+                # If something goes wrong, log and continue. This is non-fatal.
+                logger.warning(f"No se pudo verificar/agregar columna 'active' en 'clientes': {e}")
+
             sql_ventas = """
                 CREATE TABLE IF NOT EXISTS ventas(
                     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -99,7 +122,7 @@ def get_connection():
     except pymysql.Error as e:
         logger.error(f"Error obteniendo coneccion a MariaDb:{e}")
         return None
-
+        
 def insert_compra(producto, cantidad, unidad, precio_compra, precio_total, proveedor, tipo):
     conn = get_connection()
     if conn:
