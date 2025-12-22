@@ -1,9 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-from Gui.Pages.Styles.inventario_gui import InventarioTab
-#from Gui.Styles.recetas_gui import RecetasTab
+from Gui.Pages.ResumenesTabs.inventario_tab import InventarioTab
 from Core.inventario_backend import InventarioBackend
-#from Core.sub_productos_backend import SubProductosBackend
+
 from Core.logger import setup_logger
 
 class ResumenesFrame(ttk.Frame):
@@ -11,7 +10,6 @@ class ResumenesFrame(ttk.Frame):
         super().__init__(parent)
         self.logger = setup_logger()
         self.backend = InventarioBackend()
-        #self.subproductos_backend = SubProductosBackend()
         self.setup_ui()
 
         # Inventario tab
