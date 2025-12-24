@@ -65,7 +65,7 @@ class ComprasFrame(ttk.Frame):
         self.peso_paq_entry = ttk.Entry(self.paquetes_frame)
         self.peso_paq_entry.grid(row=2, column=1, pady=2)
         ttk.Label(self.paquetes_frame, text="Unidad de Peso:").grid(row=2, column=2, sticky=tk.W, pady=2)
-        self.unidad_peso_combo = ttk.Combobox(self.paquetes_frame, values=["g", "kg", "lb", "oz"])
+        self.unidad_peso_combo = ttk.Combobox(self.paquetes_frame, values=["g", "kg", "lb", "oz", "ml", "units"])
         self.unidad_peso_combo.grid(row=2, column=3, pady=2)
 
         # History treeview

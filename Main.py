@@ -8,6 +8,7 @@ from Gui.Pages.resumenes import ResumenesFrame
 from Gui.Pages.compras import ComprasFrame
 from Gui.Pages.produccion import ProduccionFrame
 from Gui.Pages.ventas import VentasFrame
+from Gui.Pages.Productos import ProductosFrame
 
 class MainInterface:
     def __init__(self, root):
@@ -27,11 +28,6 @@ class MainInterface:
                 "Resumenes",
                 "resumenes",
             ),  # Button for Resumenes: Overview of summaries and reports
-
-            (
-                "Ventas",
-                "ventas",
-            ),  # Button for Ventas: Handle sales and revenue tracking
             (
                 "Produccion",
                 "produccion",
@@ -39,7 +35,12 @@ class MainInterface:
             (
                 "Productos",
                 "productos",
-            ),  # Button for Productos: Catalog and manage products
+            ), 
+            (
+                "Ventas",
+                "ventas",
+            ),  # Button for Ventas: Handle sales and revenue tracking
+ # Button for Productos: Catalog and manage products
             ("Gastos", "gastos"),  # Button for Gastos: Record and categorize expenses
         ]
 
@@ -119,6 +120,10 @@ class MainInterface:
             self.current_page = ProduccionFrame(self.content_frame)
             self.current_page.pack(fill=tk.BOTH, expand=True)
 
+        elif page_name == "productos":
+            self.current_page = ProductosFrame(self.content_frame)
+            self.current_page.pack(fill=tk.BOTH, expand=True)
+            
         elif page_name == "ventas":
             self.current_page = VentasFrame(self.content_frame)
             self.current_page.pack(fill=tk.BOTH, expand=True)

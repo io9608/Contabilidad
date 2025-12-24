@@ -114,7 +114,6 @@ def get_connection():
                     FOREIGN KEY (producto_final_id) REFERENCES productos_finales(id)
                 )
                 """
-            cursor.execute(sql_ventas)
 
             conn.commit()
             logger.info("Tables 'compras', 'inventario', 'subproductos', 'subproducto_ingredientes', 'productos_finales', 'clientes', and 'ventas' created or already exist")

@@ -4,7 +4,7 @@ from Gui.Pages.Styles.ventas_styles import VentasStyles
 from Core.ventas_backend import VentasBackend
 from Gui.Pages.Ventas_Tabs.clientes_tab import ClientesTab
 from Gui.Pages.Ventas_Tabs.history_tab import HistorialTab
-from Gui.Pages.Ventas_Tabs.precios_tab import PreciosTab
+# from Gui.Pages.Ventas_Tabs.precios_tab import PreciosTab
 from Gui.Pages.Ventas_Tabs.ventas_registro_tab import RegistrarVentaTab
 from Core.logger import setup_logger
 
@@ -17,8 +17,8 @@ class VentasFrame(ttk.Frame):
         self.setup_ui()
 
 
-        self.precios_tab = PreciosTab(self.notebook, self.backend)
-        self.notebook.add(self.precios_tab, text="Precios de Venta")
+        # self.precios_tab = PreciosTab(self.notebook, self.backend)
+        # self.notebook.add(self.precios_tab, text="Precios de Venta")
 
         self.clientes_tab = ClientesTab(self.notebook, self.backend)
         self.notebook.add(self.clientes_tab, text="Clientes")
